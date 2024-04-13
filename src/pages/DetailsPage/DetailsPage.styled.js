@@ -6,9 +6,9 @@ text-decoration: none;
 display: block;
 margin: 40px 0;
 text-align: center;
-color: #22389e;
+color: #333333;
 
 &:hover {
-    color: #c92d2d;
+    color: red;
 }
 `;
