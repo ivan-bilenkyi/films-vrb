@@ -1,27 +1,23 @@
-import { Route, Routes } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import FirstPage from 'pages/FirstPage/FirstPage';
-import SecondPage from 'pages/SecondPage/SecondPage';
-import HalfPage from 'pages/HalfPage/HalfPage';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
-import { AppWrapper } from './App.styled';
+import {lazy} from "react";
 
-const test = import.meta.env.VITE_API_TEST;
+const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
+const FavoritePage = lazy(() => import('./pages/FavoritePage/FavoritePage.jsx'));
+const DetailsPage = lazy(() => import('./pages/DetailsPage/DetailsPage.jsx'))
 
 function App() {
-  console.log(test);
-  return (
-    <AppWrapper>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route path="/first" element={<FirstPage />} />
-          <Route path="/second" element={<SecondPage />}>
-            <Route path=":half" element={<HalfPage />} />
-          </Route>
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-      </Routes>
-    </AppWrapper>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<SharedLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/:filmId" element={<DetailsPage />} />
+                <Route path="favorite" element={<FavoritePage />} />
+                <Route path="*" element={<Navigate to="/404" />} />
+            </Route>
+            <Route path="*" element={<ErrorPage />} />
+        </Routes>
+    );
 }
 export default App;
