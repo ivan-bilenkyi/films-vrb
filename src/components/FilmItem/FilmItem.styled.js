@@ -1,8 +1,25 @@
 import styled from "styled-components";
 
-export const StyledLi = styled.li`
+export const StyledOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); 
+    opacity: 0; 
+    transition: background-color 0.3s, opacity 0.3s;
+`;
+export const StyledItem = styled.li`
     width: calc(20% - 20px);
     overflow: hidden;
+    position: relative;
+
+
+    &:hover ${StyledOverlay} {
+        background-color: rgba(0, 0, 0, 0.5); 
+        opacity: 1; 
+    }
 `;
 
 export const ImgWrapper = styled.div`
@@ -45,3 +62,25 @@ export const ItemInfo = styled.span`
     text-overflow: ellipsis;
     white-space: nowrap;
 `;
+
+export const BtnFavorite = styled.button`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    padding: 0;
+    border: none;
+
+    svg {
+        width: 32px;
+        height: 32px;
+        fill: #FFF; 
+    }
+
+    &.active {
+        svg {
+            fill: red;
+        }
+    }
+`;
+

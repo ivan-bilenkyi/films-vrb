@@ -7,5 +7,8 @@ export default function DetailsPage () {
 
     const location = useLocation();
     const backLink = useRef(location);
+
+    const item = location.state.item
+    console.log(item)
     return <StyledBackLink to={backLink.current.state?.from ?? "/"}><IoIosArrowBack style={{ width: '16px', height: "16px", verticalAlign: 'bottom' }} /> Go back</StyledBackLink>
 }

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {StyledInput} from "./SearchInput.styled.js";
 
 export default function SearchInput({onChange, films}) {
     const [searchTitle, setSearchTitle] = useState('');
@@ -11,7 +12,7 @@ export default function SearchInput({onChange, films}) {
     };
 
     return (
-        <input
+        <StyledInput
             type="text"
             value={searchTitle}
             onChange={handleSearchChange}
