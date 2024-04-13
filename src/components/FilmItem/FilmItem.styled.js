@@ -43,12 +43,11 @@ export const ItemInfoWrapper = styled.div`
 `;
 export const ItemTitle = styled.h2`
     overflow: hidden;
-    max-height: 54px;
-    margin: 5px 0 0;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 18px;
     color: #333;
+    margin-bottom: 16px;
 `;
 
 export const ItemInfo = styled.span`

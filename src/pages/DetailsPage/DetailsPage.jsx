@@ -1,99 +1,45 @@
 import { Link, useLocation } from "react-router-dom";
 import {IoIosArrowBack, IoIosStar} from 'react-icons/io';
-import styled from 'styled-components';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Container} from "../../components/Global.styled.js";
+import Modal from "../../components/Modal/Modal.jsx";
+import {getFilmById} from "../../services/api.js";
+import {
+    EditButton,
+    FilmDetails,
+    FilmImage,
+    FilmInfo,
+    FilmRating,
+    FilmTitle, RatingIcon,
+    StyledBackLink
+} from "./DetailsPage.styled.js";
 
 
-const StyledBackLink = styled(Link)`
-    display: inline-block;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    &:hover {
-        color: #555;
-    }
-`;
 
-const FilmDetails = styled.div`
-    display: flex;
-    gap: 20px;
-`;
 
-const FilmImage = styled.img`
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 5px;
-`;
-
-const FilmInfo = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const FilmTitle = styled.h1`
-    font-size: 24px;
-    margin-bottom: 10px;
-`;
-
-const FilmDescription = styled.p`
-    font-size: 16px;
-    margin-bottom: 10px;
-`;
-
-const FilmRating = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-`;
-
-const RatingIcon = styled.div`
-    color: #ffc107;
-    margin-right: 5px;
-`;
-
-const FilmRatingText = styled.p`
-    font-size: 16px;
-    margin: 0;
-`;
-
-const FilmReleaseDate = styled.p`
-    font-size: 16px;
-    margin-bottom: 10px;
-`;
-
-const FilmGenre = styled.p`
-    font-size: 16px;
-    margin-bottom: 10px;
-`;
-
-const FilmActors = styled.p`
-    font-size: 16px;
-    margin-bottom: 10px;
-`;
-
-const FilmDirector = styled.p`
-    font-size: 16px;
-    margin-bottom: 10px;
-`;
 
 const DetailsPage = () => {
     const location = useLocation();
     const backLink = useRef(location);
-    const item = location.state.item;
-
+    // const item = location.state.item;
+    const [item, setItem] = useState(location.state.item)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    useEffect(() => {
+        const fetchFilmById = async () =>{
+            try {
+                const result = await getFilmById(item.id)
+                console.log(result)
+                setItem(result)
+            } catch (error) {
+
+            }
+        }
+        fetchFilmById();
+    }, []);
     const handleOpenModal = () => {
         setIsModalOpen(!isModalOpen);
     };
-    console.log(isModalOpen)
 
     return (
         <Container>
@@ -107,23 +53,24 @@ const DetailsPage = () => {
 
                 <FilmInfo>
                     <FilmTitle>{item.title}</FilmTitle>
-                    <FilmDescription>{item.description}</FilmDescription>
+                    <p>{item.description}</p>
 
                     <FilmRating>
                         <RatingIcon>
                             <IoIosStar/>
                         </RatingIcon>
-                        <FilmRatingText>{item.rating}</FilmRatingText>
+                        <p>{item.rating}</p>
                     </FilmRating>
 
-                    <FilmReleaseDate>Release Date: {item.release_date}</FilmReleaseDate>
-                    <FilmGenre>Genre: {item.genre.join(', ')}</FilmGenre>
-                    <FilmActors>Actors: {item.actors.join(', ')}</FilmActors>
-                    <FilmDirector>Director: {item.director}</FilmDirector>
-                    <button onClick={handleOpenModal}>Edit Film</button>
+                    <p>Release Date: {item.release_date}</p>
+                    <p>Genre: {item.genre.join(', ')}</p>
+                    <p>Actors: {item.actors.join(', ')}</p>
+                    <p>Director: {item.director}</p>
+                    <EditButton onClick={handleOpenModal}>Edit Film</EditButton>
                 </FilmInfo>
 
             </FilmDetails>
+            {isModalOpen && <Modal onClose={handleOpenModal} item={item} /> }
         </Container>
     );
 };

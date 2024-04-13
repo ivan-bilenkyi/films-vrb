@@ -10,9 +10,10 @@ import {
 } from "./FilmItem.styled.js";
 import {useEffect, useState} from "react";
 import { AiOutlineHeart } from 'react-icons/ai';
+import {IoIosStar} from "react-icons/io";
 
 export const FilmItem = ({ item }) => {
-    const { id, title, release_date, director, image } = item;
+    const { id, title, release_date, rating, image } = item;
     const [isFavorite, setIsFavorite] = useState(false);
     const location = useLocation();
     const year = release_date.split("-")[0];
@@ -54,6 +55,12 @@ export const FilmItem = ({ item }) => {
                 <ItemInfoWrapper>
                     <ItemTitle>{title}</ItemTitle>
                     <ItemInfo>{year}</ItemInfo>
+                    {/*<FilmRating>*/}
+                    {/*    <RatingIcon>*/}
+                    {/*        <IoIosStar/>*/}
+                    {/*    </RatingIcon>*/}
+                    {/*    <FilmRatingText>{item.rating}</FilmRatingText>*/}
+                    {/*</FilmRating>*/}
                 </ItemInfoWrapper>
             </Link>
 
