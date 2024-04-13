@@ -1,12 +1,12 @@
 import {
-  StyledHeader, StyledList, StyledNavLink,
+    StyledHeader, StyledList, StyledNav, StyledNavLink,
 } from './Header.styled';
 
 export const Header = () => {
 
   return (
       <StyledHeader>
-        <nav>
+        <StyledNav>
           <StyledList>
             <li>
               <StyledNavLink to="/">Home</StyledNavLink>
@@ -15,7 +15,7 @@ export const Header = () => {
               <StyledNavLink to="favorite">Favorite</StyledNavLink>
             </li>
           </StyledList>
-        </nav>
+        </StyledNav>
       </StyledHeader>
   );
 };
