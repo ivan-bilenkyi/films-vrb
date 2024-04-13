@@ -3,61 +3,17 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import defaultImage from '../../assets/default.jpg';
+import {
+    DescriptionInput,
+    ErrorMessageStyled,
+    FormGroup,
+    Input,
+    Label,
+    StyledButton,
+    StyledForm
+} from "./Formik.styled.jsx";
 
-const StyledForm = styled(Form)`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-`;
 
-const FormGroup = styled.div`
-    width: calc(50% - 10px);
-    display: flex;
-    flex-direction: column;
-`;
-
-const Label = styled.label`
-    margin-bottom: 5px;
-    font-weight: bold;
-`;
-
-const Input = styled(Field)`
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    flex: 1;
-
-    &:focus {
-        border-color: #6e93b5;
-    }
-`;
-
-const DescriptionInput = styled(Input)`
-    height: 200px; 
-    resize: none; 
-`;
-
-const ErrorMessageStyled = styled(ErrorMessage)`
-    color: red;
-    margin-top: 5px;
-`;
-
-const StyledButton = styled.button`
-    padding: 10px;
-    background-color: #333333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex-grow: 1; 
-
-    &:hover {
-        color: red;
-    }
-`;
 
 export const FilmForm = ({ onSubmit, item }) => {
     const validationSchema = Yup.object().shape({
@@ -105,15 +61,15 @@ export const FilmForm = ({ onSubmit, item }) => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label htmlFor="description">Description:</Label>
-                        <DescriptionInput as="textarea" id="description" name="description" defaultValue={initialValues.description} />
-                        <ErrorMessageStyled name="description" component="div" />
-                    </FormGroup>
-
-                    <FormGroup>
                         <Label htmlFor="rating">Rating:</Label>
                         <Input type="text" id="rating" name="rating" />
                         <ErrorMessageStyled name="rating" component="div" />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label htmlFor="description">Description:</Label>
+                        <DescriptionInput as="textarea" id="description" name="description" defaultValue={initialValues.description} />
+                        <ErrorMessageStyled name="description" component="div" />
                     </FormGroup>
 
                     <FormGroup>

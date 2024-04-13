@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import {useEffect, useState} from 'react';
 import {CloseBtn, ModalContent, ModalWrapper} from "./Modal.styled.jsx";
 import {FilmForm} from "../Formik/Formik.jsx";
-import {getFilmById, updateFilmById} from "../../services/api.js";
+import {updateFilmById} from "../../services/api.js";
 import {FaTimes} from "react-icons/fa";
 import {ItemTitle} from "../FilmItem/FilmItem.styled.js";
 

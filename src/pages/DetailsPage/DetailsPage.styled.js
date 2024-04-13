@@ -1,18 +1,6 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-// export const StyledBackLink = styled(Link)`
-// text-decoration: none;
-// display: block;
-// margin: 40px 0;
-// text-align: center;
-// color: #333333;
-//
-// &:hover {
-//     color: red;
-// }
-// `;
-
 export const StyledBackLink = styled(Link)`
     margin-bottom: 20px;
     text-decoration: none;
@@ -53,11 +41,14 @@ export const FilmTitle = styled.h1`
 export const FilmRating = styled.div`
     display: flex;
     align-items: center;
+    gap: 10px;
 `;
 
 export const RatingIcon = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 4px;
     color: #ffc107;
-    margin-right: 5px;
 `;
 
 export const EditButton = styled.button`

@@ -11,6 +11,7 @@ import {
 import {useEffect, useState} from "react";
 import { AiOutlineHeart } from 'react-icons/ai';
 import {IoIosStar} from "react-icons/io";
+import {FilmRating, RatingIcon} from "../../pages/DetailsPage/DetailsPage.styled.js";
 
 export const FilmItem = ({ item }) => {
     const { id, title, release_date, rating, image } = item;
@@ -54,13 +55,15 @@ export const FilmItem = ({ item }) => {
 
                 <ItemInfoWrapper>
                     <ItemTitle>{title}</ItemTitle>
-                    <ItemInfo>{year}</ItemInfo>
-                    {/*<FilmRating>*/}
-                    {/*    <RatingIcon>*/}
-                    {/*        <IoIosStar/>*/}
-                    {/*    </RatingIcon>*/}
-                    {/*    <FilmRatingText>{item.rating}</FilmRatingText>*/}
-                    {/*</FilmRating>*/}
+
+                    <FilmRating>
+                        <ItemInfo>{year}</ItemInfo>
+                        <RatingIcon>
+                            <IoIosStar/>
+                            <ItemInfo>{item.rating}</ItemInfo>
+                        </RatingIcon>
+
+                    </FilmRating>
                 </ItemInfoWrapper>
             </Link>
 

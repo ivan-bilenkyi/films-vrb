@@ -50,7 +50,7 @@ export const ItemTitle = styled.h2`
     margin-bottom: 16px;
 `;
 
-export const ItemInfo = styled.span`
+export const ItemInfo = styled.p`
     height: 18px;
     margin-top: 2px;
     color: #a6a6a6;

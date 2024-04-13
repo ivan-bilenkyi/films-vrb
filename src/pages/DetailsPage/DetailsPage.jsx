@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {IoIosArrowBack, IoIosStar} from 'react-icons/io';
 import {useEffect, useRef, useState} from "react";
 import {Container} from "../../components/Global.styled.js";

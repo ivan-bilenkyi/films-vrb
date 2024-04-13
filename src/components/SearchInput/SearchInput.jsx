@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyledInput} from "./SearchInput.styled.js";
 
 export default function SearchInput({onChange, films}) {
