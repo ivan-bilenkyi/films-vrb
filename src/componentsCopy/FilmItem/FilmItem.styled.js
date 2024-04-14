@@ -62,27 +62,23 @@ export const ItemInfo = styled.p`
     white-space: nowrap;
 `;
 
-export const ButtonGroup = styled.div`
+export const BtnFavorite = styled.button`
     position: absolute;
     top: 10px;
     right: 10px;
-    display: flex;
-    gap: 4px;
-`;
-export const Button = styled.button`
     background: transparent;
     padding: 0;
     border: none;
-    
+
     svg {
         width: 32px;
         height: 32px;
-        fill: #ffffff;
+        fill: #FFF; 
     }
 
     &.active {
         svg {
-            fill: #ff0000;
+            fill: red;
         }
     }
 `;

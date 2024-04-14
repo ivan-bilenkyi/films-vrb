@@ -5,13 +5,19 @@ import {FilmsList} from "../../components/FilmsList/FilmsList.jsx";
 import {useEffect, useState} from "react";
 
 export default function FavoritePage() {
+    const [favoriteFilms, setFavoriteFilms] = useState([]);
+
+    useEffect(() => {
+        const existingItems = JSON.parse(localStorage.getItem('favoriteFilms')) || [];
+        setFavoriteFilms(existingItems);
+    }, []);
 
     return (
         <Container>
             <Wrapper>
                 <StyledTitle>Favorite</StyledTitle>
             </Wrapper>
-            <FilmsList  />
+            <FilmsList films={favoriteFilms} />
         </Container>
     );
 }

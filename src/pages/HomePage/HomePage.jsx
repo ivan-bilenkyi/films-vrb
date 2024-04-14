@@ -1,43 +1,29 @@
-import { useEffect, useState } from "react";
-import { getAllFilms } from "../../services/api.js";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { FilmsList } from "../../components/FilmsList/FilmsList.jsx";
 import { Container } from "../../components/Global.styled.js";
-import SearchInput from "../../components/SearchInput/SearchInput.jsx";
 import {StyledTitle} from "../../components/FilmsList/FilmsList.styled.js";
 import {Wrapper} from "./HomePage.styled.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {selectError, selectIsLoading} from "../../redux/filmsSlice/selectors.js";
+import {getAllFilms} from "../../redux/filmsSlice/operations.js";
 
 export default function HomePage() {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [films, setFilms] = useState([]);
-    const [filteredFilms, setFilteredFilms] = useState([]);
-
-    const location = useLocation();
+    const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading);
+    const error = useSelector(selectError);
 
     useEffect(() => {
-        const getFilms = async () => {
-            setIsLoading(true);
-            try {
-                const results = await getAllFilms();
-                setFilms(results);
-                setFilteredFilms(results);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        getFilms();
-    }, []);
+        dispatch(getAllFilms());
+    }, [dispatch]);
+
+
 
     return (
         <Container>
             <Wrapper>
                 <StyledTitle>Films</StyledTitle>
-                <SearchInput onChange={setFilteredFilms} films={films} />
             </Wrapper>
-            <FilmsList films={filteredFilms} />
+            <FilmsList />
         </Container>
     );
 }

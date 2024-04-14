@@ -29,6 +29,7 @@ const DetailsPage = () => {
         const fetchFilmById = async () =>{
             try {
                 const result = await getFilmById(item.id)
+                console.log(result)
                 setItem(result)
             } catch (error) {
 
