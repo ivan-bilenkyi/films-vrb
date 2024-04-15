@@ -4,13 +4,23 @@ import {ErrorMessage, Field, Form} from "formik";
 export const StyledForm = styled(Form)`
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+
+    }
 `;
 
 export const FormGroup = styled.div`
-    width: calc(50% - 10px);
+    width: 100%;
     display: flex;
     flex-direction: column;
+    
+    @media (min-width: 768px) {
+        width: calc(50% - 10px);
+    }
 `;
 
 export const Label = styled.label`
