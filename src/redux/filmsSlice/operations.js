@@ -7,43 +7,59 @@ export const getAllFilms = createAsyncThunk(
     'tasks/getAllFilms',
     async (_, thunkAPI) => {
         try {
-            const response = await axios.get('/films');
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            const {data} = await axios.get('/films');
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
 
-// export const getFilmById = createAsyncThunk('films/getFilmById', async (id) => {
-//     try {
-//         const { data } = await axios.get(`/films/${id}`);
-//         console.log(data);
-//         return data;
-//     } catch (error) {
-//         console.log(error);
-//         throw error;
-//     }
-// });
+export const getFilmById = createAsyncThunk(
+    'films/getFilmById',
+    async (id) => {
+    try {
+        const { data } = await axios.get(`/films/${id}`);
+        return data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
 
 export const deleteById = createAsyncThunk(
     'films/deleteById',
     async (id, thunkAPI) => {
         try {
-            const response = await axios.delete(`/films/${id}`);
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+            const { data } = await axios.delete(`/films/${id}`);
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 )
-export const updateFilmById = createAsyncThunk('films/updateFilmById', async ({ filmId, value }) => {
-    try {
-        const { data } = await axios.put(`/films/${filmId}`, { ...value });
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.log(error);
-        throw error;
+export const updateFilmById = createAsyncThunk(
+    'films/updateFilmById',
+    async ({id, values}, thunkAPI) => {
+        try {
+            const { data } = await axios.put(`/films/${id}`, { ...values });
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
     }
-});
+);
+
+export const createFilms = createAsyncThunk(
+    'films/createFilm',
+    async ( values , thunkAPI) => {
+        try {
+            const { data } = await axios.post('/films', { ...values });
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
+
+

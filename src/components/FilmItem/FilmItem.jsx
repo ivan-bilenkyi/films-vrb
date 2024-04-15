@@ -1,6 +1,8 @@
 import {Link, useLocation} from "react-router-dom";
 import {
-    Button, ButtonGroup,
+    BtnDelete,
+    BtnFavorite,
+    ButtonGroup,
     ImgWrapper,
     ItemInfo,
     ItemInfoWrapper,
@@ -12,7 +14,7 @@ import {useEffect, useState} from "react";
 import {IoIosStar} from "react-icons/io";
 import {FilmRating, RatingIcon} from "../../pages/DetailsPage/DetailsPage.styled.js";
 import {useDispatch, useSelector} from 'react-redux';
-import {addToFavorite} from "../../redux/favoriteSlice/favoriteSlice.js";
+import {addToFavorite, removeFavorite} from "../../redux/favoriteSlice/favoriteSlice.js";
 import {GoBookmark} from "react-icons/go";
 import {MdOutlineDeleteOutline} from "react-icons/md";
 import {deleteById} from "../../redux/filmsSlice/operations.js";
@@ -25,19 +27,27 @@ export const FilmItem = ({ item }) => {
     const year = release_date.split("-")[0];
     const dispatch = useDispatch();
     const favoriteFilms = useSelector(selectFavoriteFilms);
+    const {pathname} = useLocation()
+    const path = pathname === "/favorite";
 
     useEffect(() => {
         setIsFavorite(favoriteFilms.some(film => film.id === id));
     }, [favoriteFilms, id]);
 
     const handleDelete =() => {
-        dispatch(addToFavorite(item));
-        dispatch(deleteById(id));
+        dispatch(removeFavorite(item));
+        console.log(item.id)
+        dispatch(deleteById(item.id));
     }
 
     const handleToggleFavorite = () => {
         setIsFavorite(!isFavorite)
-        dispatch(addToFavorite(item));
+        if(!isFavorite) {
+            dispatch(addToFavorite(item));
+        } else {
+            dispatch(removeFavorite(item));
+
+        }
     };
 
     return (
@@ -45,18 +55,7 @@ export const FilmItem = ({ item }) => {
             <Link to={`/${id}`} state={{ from: location, item }}>
                 <ImgWrapper>
                     <StyledImg src={image} alt={title} />
-                    <StyledOverlay>
-                        <ButtonGroup>
-                            <Button onClick={(e) => { e.preventDefault(); handleDelete() }}>
-                                <MdOutlineDeleteOutline/>
-                            </Button>
-                            <Button onClick={(e) => { e.preventDefault(); handleToggleFavorite()}} className={isFavorite ? 'active' : ''}>
-                                <GoBookmark/>
-                            </Button>
-
-                        </ButtonGroup>
-
-                    </StyledOverlay>
+                    <StyledOverlay/>
                 </ImgWrapper>
 
                 <ItemInfoWrapper>
@@ -71,6 +70,16 @@ export const FilmItem = ({ item }) => {
                     </FilmRating>
                 </ItemInfoWrapper>
             </Link>
+            <ButtonGroup>
+                { !path &&
+                    <BtnDelete onClick={handleDelete}>
+                        <MdOutlineDeleteOutline/>
+                    </BtnDelete>
+                }
+                <BtnFavorite onClick={handleToggleFavorite} className={isFavorite ? 'active' : ''}>
+                    <GoBookmark/>
+                </BtnFavorite>
+            </ButtonGroup>
         </StyledItem>
     );
 };

@@ -1,44 +1,53 @@
-import { useLocation } from "react-router-dom";
-import {IoIosArrowBack, IoIosStar} from 'react-icons/io';
-import {useEffect, useRef, useState} from "react";
-import {Container} from "../../components/Global.styled.js";
+import { useEffect, useRef, useState } from "react";
+import { Container } from "../../components/Global.styled.js";
 import Modal from "../../components/Modal/Modal.jsx";
-import {getFilmById} from "../../services/api.js";
+import { updateFilmById, getFilmById } from "../../redux/filmsSlice/operations.js";
 import {
     EditButton,
     FilmDetails,
     FilmImage,
     FilmInfo,
     FilmRating,
-    FilmTitle, RatingIcon,
+    FilmTitle,
+    RatingIcon,
     StyledBackLink
 } from "./DetailsPage.styled.js";
-
-
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilms } from "../../redux/filmsSlice/selectors.js";
+import {IoIosArrowBack, IoIosStar} from "react-icons/io";
+import {useLocation} from "react-router-dom";
 
 const DetailsPage = () => {
     const location = useLocation();
     const backLink = useRef(location);
-    // const item = location.state.item;
-    const [item, setItem] = useState(location.state.item)
+    const [item, setItem] = useState(location.state.item);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dispatch = useDispatch();
+
+    const films = useSelector(selectFilms);
+
+    const film = films.find(f => f.id === item.id);
 
     useEffect(() => {
         const fetchFilmById = async () =>{
             try {
-                const result = await getFilmById(item.id)
-                setItem(result)
+                dispatch(getFilmById(item.id));
             } catch (error) {
-
+                console.error(error);
             }
         }
         fetchFilmById();
-    }, []);
+    }, [item.id]);
+
     const handleOpenModal = () => {
         setIsModalOpen(!isModalOpen);
     };
+
+    const handleSubmit = (id, values) => {
+        dispatch(updateFilmById({ id, values }));
+    };
+
+    if (!film) return null;
 
     return (
         <Container>
@@ -48,28 +57,28 @@ const DetailsPage = () => {
             </StyledBackLink>
 
             <FilmDetails>
-                <FilmImage src={item.image} alt={item.title} />
+                <FilmImage src={film.image} alt={film.title} />
 
                 <FilmInfo>
-                    <FilmTitle>{item.title}</FilmTitle>
-                    <p>{item.description}</p>
+                    <FilmTitle>{film.title}</FilmTitle>
+                    <p>{film.description}</p>
 
                     <FilmRating>
                         <RatingIcon>
-                            <IoIosStar/>
+                            <IoIosStar />
                         </RatingIcon>
-                        <p>{item.rating}</p>
+                        <p>{film.rating}</p>
                     </FilmRating>
 
-                    <p>Release Date: {item.release_date}</p>
-                    <p>Genre: {item.genre.join(', ')}</p>
-                    <p>Actors: {item.actors.join(', ')}</p>
-                    <p>Director: {item.director}</p>
+                    <p>Release Date: {film.release_date}</p>
+                    <p>Genre: {film.genre.join(', ')}</p>
+                    <p>Actors: {film.actors.join(', ')}</p>
+                    <p>Director: {film.director}</p>
                     <EditButton onClick={handleOpenModal}>Edit Film</EditButton>
                 </FilmInfo>
 
             </FilmDetails>
-            {isModalOpen && <Modal onClose={handleOpenModal} item={item} /> }
+            {isModalOpen && <Modal onClose={handleOpenModal} item={item} onSubmit={handleSubmit} />}
         </Container>
     );
 };

@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
 import {CloseBtn, ModalContent, ModalWrapper} from "./Modal.styled.jsx";
 import {FilmForm} from "../Formik/Formik.jsx";
-import {updateFilmById} from "../../services/api.js";
 import {FaTimes} from "react-icons/fa";
 import {ItemTitle} from "../FilmItem/FilmItem.styled.js";
 
 
-const Modal = ({ onClose, item }) => {
+const Modal = ({ onClose, item= [], onSubmit }) => {
     const [isBodyScrollLocked, setIsBodyScrollLocked] = useState(false);
 
     useEffect(() => {
@@ -47,16 +46,12 @@ const Modal = ({ onClose, item }) => {
         };
     }, []);
 
-    const handleSubmit = (values, { setSubmitting }) => {
-        updateFilmById(item.id, values)
-        onClose()
-    };
 
     return (
         <ModalWrapper>
             <ModalContent className="modal-content">
                 <ItemTitle>Edit Film</ItemTitle>
-                <FilmForm item={item} onSubmit={handleSubmit}/>
+                <FilmForm item={item} onSendForm={onSubmit} onClose={onClose}/>
                 <CloseBtn onClick={onClose}><FaTimes/></CloseBtn>
             </ModalContent>
         </ModalWrapper>

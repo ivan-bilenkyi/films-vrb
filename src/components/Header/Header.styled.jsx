@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-    //width: 100vw;
     background-color: #333;
     padding: 16px 0;
-    div{
+
+    /* Styles for the first child div */
+    > div:first-child {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -39,5 +40,14 @@ export const StyledNavLink = styled(NavLink)`
     &.active {
         color: #c92d2d;
     };
+`;
+
+export const Wrapper = styled.div`
+    display: flex;
+    gap: 16px;
+    button {
+        border-radius: 10px;
+        border: 1px solid #fff;
+    }
 `;
 

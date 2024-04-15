@@ -1,8 +1,7 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, {useRef, useState} from 'react';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
-import defaultImage from '../../assets/default.jpg';
+
 import {
     DescriptionInput,
     ErrorMessageStyled,
@@ -12,13 +11,17 @@ import {
     StyledButton,
     StyledForm
 } from "./Formik.styled.jsx";
+import {UploadImage} from "../UploadImage/UploadImage.js";
 
 
 
-export const FilmForm = ({ onSubmit, item }) => {
+export const FilmForm = ({ onSendForm, item, onClose }) => {
+    const [imageUrl, setImageUrl] = useState(item.image);
+    const imageInputRef = useRef(null);
+
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('Title is required'),
-        description: Yup.string().required('Description is required'),
+        description: Yup.string(),
         rating: Yup.number()
             .min(0, 'Rating must be between 0 and 10')
             .max(10, 'Rating must be between 0 and 10')
@@ -41,15 +44,27 @@ export const FilmForm = ({ onSubmit, item }) => {
         image: ''
     };
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setImageUrl(URL.createObjectURL(file));
+        }
+    };
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
                 const genreArray = values.genre.split(',').map(genre => genre.trim());
                 const actorsArray = values.actors.split(',').map(actor => actor.trim());
-
-                onSubmit({ ...values, genre: genreArray, actors: actorsArray, image: defaultImage }, { setSubmitting });
+                let newUrlImg = imageUrl;
+                if (imageUrl !== item.image) {
+                    const file = imageInputRef.current.files[0];
+                    newUrlImg = await UploadImage(file);
+                }
+                onClose();
+                onSendForm(item.id, { ...values, genre: genreArray, actors: actorsArray, image: newUrlImg });
             }}
         >
             {() => (
@@ -98,8 +113,9 @@ export const FilmForm = ({ onSubmit, item }) => {
 
                     <FormGroup>
                         <Label htmlFor="image">Image:</Label>
-                        <Input type="file" id="image" name="image" accept="image/*" />
-                        <ErrorMessageStyled name="image" component="div" />
+                        <input ref={imageInputRef} type="file" name="image" id="image" accept="image/*"
+                               onChange={handleFileChange}/>
+                        <ErrorMessageStyled name="image" component="div"/>
                     </FormGroup>
 
                     <StyledButton type="submit">Save</StyledButton>
@@ -108,3 +124,4 @@ export const FilmForm = ({ onSubmit, item }) => {
         </Formik>
     );
 };
+

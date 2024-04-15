@@ -9,18 +9,16 @@ const favoriteSlice = createSlice({
     },
     reducers: {
         addToFavorite(state, { payload }) {
-            const newItem = payload;
-            const existingItemIndex = state.items.findIndex(item => item.id === newItem.id);
-            if (existingItemIndex !== -1) {
-                state.items.splice(existingItemIndex, 1);
-            } else {
-                state.items.push(newItem);
-            }
+            state.items.push(payload);
+        },
+        removeFavorite(state, { payload }) {
+            const existingItemIndex = state.items.findIndex(item => item.id === payload.id);
+            if (existingItemIndex !== -1) state.items.splice(existingItemIndex, 1);
         },
     },
 });
 
-export const { addToFavorite } = favoriteSlice.actions;
+export const { addToFavorite, removeFavorite } = favoriteSlice.actions;
 
 const persistConfig = {
     key: 'favorite',

@@ -6,19 +6,69 @@ export const StyledOverlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0); 
-    opacity: 0; 
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
     transition: background-color 0.3s, opacity 0.3s;
 `;
+
+export const ButtonGroup = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: background-color 0.3s, opacity 0.3s;
+`;
+
+export const BtnFavorite = styled.button`
+    background: transparent;
+    padding: 0;
+    border: none;
+
+    svg {
+        width: 32px;
+        height: 32px;
+        fill: #ffffff;
+    }
+
+    &.active {
+        svg {
+            fill: #ff0000;
+        }
+    }
+`;
+
 export const StyledItem = styled.li`
     width: calc(20% - 20px);
     overflow: hidden;
     position: relative;
 
-
     &:hover ${StyledOverlay} {
-        background-color: rgba(0, 0, 0, 0.5); 
-        opacity: 1; 
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 1;
+    }
+
+    &:hover ${ButtonGroup} {
+        opacity: 1;
+    }
+
+    &:hover ${BtnFavorite}.active {
+        svg {
+            fill: #ff0000;
+        }
+    }
+`;
+
+export const BtnDelete = styled.button`
+    background: transparent;
+    padding: 0;
+    border: none;
+    
+    svg {
+        width: 32px;
+        height: 32px;
+        fill: #ffffff;
     }
 `;
 
@@ -57,33 +107,6 @@ export const ItemInfo = styled.p`
     font-size: 12px;
     font-weight: 450;
     line-height: 18px;
-    //overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 `;
-
-export const ButtonGroup = styled.div`
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 4px;
-`;
-export const Button = styled.button`
-    background: transparent;
-    padding: 0;
-    border: none;
-    
-    svg {
-        width: 32px;
-        height: 32px;
-        fill: #ffffff;
-    }
-
-    &.active {
-        svg {
-            fill: #ff0000;
-        }
-    }
-`;
-

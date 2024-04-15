@@ -54,7 +54,7 @@ export const RatingIcon = styled.div`
 export const EditButton = styled.button`
     background-color: #333333;
     color: #fff;
-    padding: 10px 20px;
+    padding: 8px 18px;
     border: none;
     max-width: fit-content;
     border-radius: 5px;
