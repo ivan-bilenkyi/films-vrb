@@ -18,6 +18,11 @@ export const StyledBackLink = styled(Link)`
 export const FilmDetails = styled.div`
     display: flex;
     gap: 20px;
+    flex-direction: column;
+    
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
 `;
 
 export const FilmImage = styled.img`

@@ -4,12 +4,18 @@ import styled from "styled-components";
 export const StyledHeader = styled.header`
     background-color: #333;
     padding: 16px 0;
+    margin-bottom: 24px;
 
-    /* Styles for the first child div */
     > div:first-child {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        gap: 16px;
+        
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
     }
 `;
 

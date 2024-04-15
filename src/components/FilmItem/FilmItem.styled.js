@@ -6,9 +6,15 @@ export const StyledOverlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
     transition: background-color 0.3s, opacity 0.3s;
+    
+    @media (min-width: 1440px) {
+        background-color: rgba(0, 0, 0, 0);
+        opacity: 0;
+
+    }
 `;
 
 export const ButtonGroup = styled.div`
@@ -17,8 +23,13 @@ export const ButtonGroup = styled.div`
     right: 10px;
     display: flex;
     gap: 4px;
-    opacity: 0;
+    opacity: 1;
     transition: background-color 0.3s, opacity 0.3s;
+    
+    @media (min-width: 1440px) {
+        opacity: 0;
+        
+    }
 `;
 
 export const BtnFavorite = styled.button`
@@ -40,12 +51,12 @@ export const BtnFavorite = styled.button`
 `;
 
 export const StyledItem = styled.li`
-    width: calc(20% - 20px);
+    width: 100%;
     overflow: hidden;
     position: relative;
 
     &:hover ${StyledOverlay} {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
         opacity: 1;
     }
 
@@ -57,6 +68,14 @@ export const StyledItem = styled.li`
         svg {
             fill: #ff0000;
         }
+    }
+    
+    @media (min-width: 768px) {
+        width: calc(33.3% - 16px);
+    }
+
+    @media (min-width: 1440px) {
+        width: calc(20% - 20px);
     }
 `;
 
