@@ -1,6 +1,6 @@
 import { Modal } from "../Modal/Modal.jsx";
-import { Login } from "../Login/Login.jsx";
-import { Register } from "../Register/Register.jsx";
+import {LoginForm} from "../Login/LoginForm.jsx";
+import { RegisterForm } from "../Register/RegisterForm.jsx";
 import { useState } from "react";
 
 export const UserBar = () => {
@@ -14,12 +14,14 @@ export const UserBar = () => {
 
     return (
         <div>
-            <button onClick={() => openModal(true)}>Login</button> {/* При кліку відкривається форма логіну */}
-            <button onClick={() => openModal(false)}>Register</button> {/* При кліку відкривається форма реєстрації */}
-
+            <button onClick={() => openModal(true)}>Login</button>
+            <button onClick={() => openModal(false)}>Register</button>
+            {/*{isSelected ? <LoginForm /> : <RegisterForm />}*/}
             <Modal onClose={() => setIsOpen(false)} isOpen={isOpen}>
                 {/* Відображення логіну або реєстрації в залежності від значення isLoginSelected */}
-                {isSelected ? <Login /> : <Register />}
+                {isSelected ? <LoginForm /> : <RegisterForm />}
+                {!isSelected ? <p>Already have an account? <a onClick={() => openModal(true)}>Log In</a></p> :
+                    <p>Don’t have an account? <a onClick={() => openModal(false)}>Sign Up</a></p>}
             </Modal>
         </div>
     );
