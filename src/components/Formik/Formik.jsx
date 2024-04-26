@@ -1,7 +1,7 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
+import { UploadImage } from "../UploadImage/UploadImage.js";
 import {
     DescriptionInput,
     ErrorMessageStyled,
@@ -11,12 +11,9 @@ import {
     StyledButton,
     StyledForm
 } from "./Formik.styled.jsx";
-import {UploadImage} from "../UploadImage/UploadImage.js";
-
-
 
 export const FilmForm = ({ onSendForm, item, onClose }) => {
-    const [imageUrl, setImageUrl] = useState(item.image);
+    const [imageUrl, setImageUrl] = useState(item?.image);
     const imageInputRef = useRef(null);
 
     const validationSchema = Yup.object().shape({
@@ -34,13 +31,13 @@ export const FilmForm = ({ onSendForm, item, onClose }) => {
     });
 
     const initialValues = {
-        title: item.title || '',
-        description: item.description || '',
-        rating: item.rating || '',
-        release_date: item.release_date || '',
-        genre: item.genre ? item.genre.join(', ') : '',
-        actors: item.actors ? item.actors.join(', ') : '',
-        director: item.director || '',
+        title: item?.title || '',
+        description: item?.description || '',
+        rating: item?.rating || '',
+        release_date: item?.release_date || '',
+        genre: item?.genre ? item.genre.join(', ') : '',
+        actors: item?.actors ? item.actors.join(', ') : '',
+        director: item?.director || '',
         image: ''
     };
 
@@ -59,19 +56,19 @@ export const FilmForm = ({ onSendForm, item, onClose }) => {
                 const genreArray = values.genre.split(',').map(genre => genre.trim());
                 const actorsArray = values.actors.split(',').map(actor => actor.trim());
                 let newUrlImg = imageUrl;
-                if (imageUrl !== item.image) {
+                if (imageUrl !== item?.image) {
                     const file = imageInputRef.current.files[0];
                     newUrlImg = await UploadImage(file);
                 }
                 onClose();
-                onSendForm(item.id, { ...values, genre: genreArray, actors: actorsArray, image: newUrlImg });
+                onSendForm(item?.id, { ...values, genre: genreArray, actors: actorsArray, image: newUrlImg });
             }}
         >
             {() => (
-                <StyledForm>
+                <StyledForm autoComplete="off">
                     <FormGroup>
                         <Label htmlFor="title">Title:</Label>
-                        <Input type="text" id="title" name="title" />
+                        <Input type="text" id="title" name="title"/>
                         <ErrorMessageStyled name="title" component="div" />
                     </FormGroup>
 
@@ -83,7 +80,7 @@ export const FilmForm = ({ onSendForm, item, onClose }) => {
 
                     <FormGroup>
                         <Label htmlFor="description">Description:</Label>
-                        <DescriptionInput as="textarea" id="description" name="description" defaultValue={initialValues.description} />
+                        <DescriptionInput as="textarea" id="description" name="description" />
                         <ErrorMessageStyled name="description" component="div" />
                     </FormGroup>
 
@@ -124,4 +121,3 @@ export const FilmForm = ({ onSendForm, item, onClose }) => {
         </Formik>
     );
 };
-

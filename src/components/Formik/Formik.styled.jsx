@@ -17,6 +17,7 @@ export const FormGroup = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
     
     @media (min-width: 768px) {
         width: calc(50% - 10px);
@@ -46,8 +47,12 @@ export const DescriptionInput = styled(Input)`
 `;
 
 export const ErrorMessageStyled = styled(ErrorMessage)`
+    position: absolute;
+    top: 0;
+    right: 0;
     color: red;
     margin-top: 5px;
+    font-size: 12px;
 `;
 
 export const StyledButton = styled.button`

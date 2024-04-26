@@ -48,12 +48,4 @@ export const StyledNavLink = styled(NavLink)`
     };
 `;
 
-export const Wrapper = styled.div`
-    display: flex;
-    gap: 16px;
-    button {
-        border-radius: 10px;
-        border: 1px solid #fff;
-    }
-`;
 

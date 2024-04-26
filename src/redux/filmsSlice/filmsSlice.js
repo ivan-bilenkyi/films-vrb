@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createFilms, deleteById, getAllFilms, getFilmById, updateFilmById } from './operations';
 
-const slice = createSlice({
+const filmsSlice = createSlice({
     name: 'films',
     initialState: {
         items: [],
@@ -83,4 +83,4 @@ const slice = createSlice({
             }),
 });
 
-export default slice.reducer;
+export const filmReducer = filmsSlice.reducer
