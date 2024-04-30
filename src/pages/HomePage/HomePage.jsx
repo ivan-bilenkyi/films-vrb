@@ -13,6 +13,7 @@ import {FilmForm} from "../../components/Formik/Formik.jsx";
 import styles from "../../components/Modal/Modal.module.css";
 import {FaTimes} from "react-icons/fa";
 import {Modal} from "../../components/Modal/Modal.jsx";
+import {SelectFilters} from "../../components/SelectFilters/SelectFilters.jsx";
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -34,8 +35,9 @@ export default function HomePage() {
             <Wrapper>
                 <StyledTitle>Films</StyledTitle>
                 <WrapperBtn>
-                    <EditButton onClick={() => setIsOpen(true)}>Add Film</EditButton>
+                    <SelectFilters/>
                     <SearchInput />
+                    <EditButton onClick={() => setIsOpen(true)}>Add Film</EditButton>
                 </WrapperBtn>
                 <Modal onClose={() => setIsOpen(false)} isOpen={isOpen}>
                     <ItemTitle>New Film</ItemTitle>

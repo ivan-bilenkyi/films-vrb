@@ -35,14 +35,12 @@ function App() {
                 <Route path="/:filmId" element={<DetailsPage />} />
                 <Route
                     path="/favorite"
-                    element={
-                        <PrivateRoute redirectTo="/" component={<FavoritePage />} />
-                    }
+                    element={<PrivateRoute redirectTo="/" component={FavoritePage} />}
                 />
-                <Route path="*" element={<Navigate to="/404" />} />
             </Route>
             <Route path="*" element={<ErrorPage />} />
         </Routes>
+
     );
 }
 export default App;

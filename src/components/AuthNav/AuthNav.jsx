@@ -2,7 +2,6 @@ import { Modal } from "../Modal/Modal.jsx";
 import {LoginForm} from "../UserForm/LoginForm.jsx";
 import { RegisterForm } from "../UserForm/RegisterForm.jsx";
 import { useState } from "react";
-import {auth} from "../../firebase.js";
 import {useSelector} from "react-redux";
 import {selectIsLoggedIn} from "../../redux/auth/selectors.js";
 import {UserMenu} from "../UserMenu/UserMenu.jsx";
@@ -16,8 +15,6 @@ export const AuthNav = () => {
         setIsSelected(value);
         setIsOpen(true);
     };
-
-    console.log(auth.currentUser);
 
     return (
         isLoggedIn ? (

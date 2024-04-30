@@ -16,7 +16,7 @@ export const Header = () => {
                           <StyledNavLink to="/">Home</StyledNavLink>
                       </li>
                       <li>
-                          <StyledNavLink to="favorite">Favorite</StyledNavLink>
+                          <StyledNavLink to="/favorite">Favorite</StyledNavLink>
                       </li>
                   </StyledList>
               </StyledNav>
