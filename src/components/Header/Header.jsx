@@ -2,7 +2,7 @@ import {
     StyledHeader, StyledList, StyledNav, StyledNavLink,
 } from './Header.styled';
 import {Container} from "../Global.styled.js";
-import {UserBar} from "../UserBar/UserBar.jsx";
+import {AuthNav} from "../AuthNav/AuthNav.jsx";
 
 
 export const Header = () => {
@@ -20,7 +20,7 @@ export const Header = () => {
                       </li>
                   </StyledList>
               </StyledNav>
-              <UserBar/>
+              <AuthNav/>
           </Container>
       </StyledHeader>
   );

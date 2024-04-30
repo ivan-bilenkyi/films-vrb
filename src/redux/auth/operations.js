@@ -1,73 +1,63 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import toast from 'react-hot-toast';
-import axios from "axios";
-
-export const setAuthHeader = token => {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const clearAuthHeader = () => {
-    axios.defaults.headers.common.Authorization = '';
-};
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    signOut,
+} from "firebase/auth";
+import {auth} from "../../firebase.js"
+import toast, { Toaster } from "react-hot-toast";
 
 export const register = createAsyncThunk(
-    'users/register',
-    async (data, thunkAPI) => {
+    "auth/register",
+    async (body, thunkAPI) => {
         try {
-            const result = await axios.post('/users/register', data);
-            setAuthHeader(result.data.token);
-            return result.data;
+            const {user} = await createUserWithEmailAndPassword(
+                auth,
+                body.email,
+                body.password,
+            );
+            await updateProfile(user, { displayName: body.name });
+
+            const { uid, displayName, email } = user;
+
+            return { uid, displayName, email };
         } catch (error) {
-            toast.error(error.message);
             return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
 
-export const login = createAsyncThunk(
-    'users/login',
-    async (data, thunkAPI) => {
+export const logIn = createAsyncThunk(
+    "auth/logIn",
+    async (body, thunkAPI) => {
         try {
-            const result = await axios.post('/users/login', data);
-            setAuthHeader(result.data.token);
-            return result.data;
+            const {user} = await signInWithEmailAndPassword(
+                auth,
+                body.email,
+                body.password
+            );
+            const { uid, displayName, email } = user;
+
+            return { uid, displayName, email };
         } catch (error) {
-            toast.error(error.message);
+            toast.error(`the user with such data was not found in the database`);
             return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
 
-export const logout = createAsyncThunk(
-    'users/logout',
+
+export const logOut = createAsyncThunk(
+    "auth/logOut",
     async (_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        setAuthHeader(state.auth.token);
         try {
-            await axios('/users/logout');
-            clearAuthHeader();
-        } catch (error) {
-            toast.error(error.message);
-            return thunkAPI.rejectWithValue(error.message);
-        }
-    }
-);
-
-export const refreshUser = createAsyncThunk(
-    'auth/refresh',
-    async (_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const persistedToken = state.auth.token;
-        if (!persistedToken) {
-            return thunkAPI.rejectWithValue('Unable to fetch user');
-        }
-
-        try {
-            setAuthHeader(persistedToken);
-            const result = await axios.get('/users/current');
-            return result.data;
+            await signOut(auth);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
+
+
+

@@ -1,59 +1,12 @@
-import React, {useState} from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {useState} from 'react';
+import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
 import {IoEyeOffOutline, IoEyeOutline} from "react-icons/io5";
-import {ToggleBtn} from "../Login/LoginForm.jsx";
-
-const FormContainer = styled.div`
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-`;
-
-const Title = styled.h2`
-    margin-bottom: 20px;
-`;
-
-const Text = styled.p`
-    margin-bottom: 40px;
-`;
-
-const FormControl = styled.div`
-    position: relative;
-    margin-bottom: 20px;
-`;
-
-const Input = styled(Field)`
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(18, 20, 23, 0.10);
+import {ErrorMsg, FormContainer, FormControl, Input, SubmitButton, Title, Text, ToggleBtn} from "./Form.styled.js";
+import {register} from "../../redux/auth/operations.js";
+import {useDispatch} from "react-redux";
 
 
-`;
-
-const ErrorMsg = styled.div`
-    position: absolute;
-    color: red;
-    font-size: 0.8rem;
-`;
-
-const SubmitButton = styled.button`
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 12px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    
-    &:hover {
-        background-color: #0056b3;
-    }
-`;
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Обов\'язкове поле'),
@@ -69,10 +22,16 @@ const initialState = {
 
 export const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(true);
+    const dispatch = useDispatch()
 
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
     };
+
+    const handleSubmit = async (values) => {
+        dispatch(register(values))
+    }
+
     return (
         <FormContainer>
             <Title>Register</Title>
@@ -81,10 +40,7 @@ export const RegisterForm = () => {
                 initialValues={initialState}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
+                    handleSubmit(values)
                 }}
             >
                 <Form>

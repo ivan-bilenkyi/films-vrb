@@ -1,89 +1,49 @@
 import { createSlice } from '@reduxjs/toolkit';
-import storage from "redux-persist/lib/storage";
-import {persistReducer} from "redux-persist";
+import {logIn, logOut, register} from "./operations.js";
+
+const initialState = {
+    user: {
+        name: null,
+        email: null,
+        id: null,
+    },
+    isLoggedIn: false,
+}
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: {
-        user: { name: null, email: null },
-        token: "",
-        isAuthenticated: false,
-        isRefreshing: true,
-        isLoading: false,
-        error: null,
+    initialState: initialState,
+    reducers: {
+        setUser(state, action) {
+            state.user.email = action.payload.email;
+            state.user.name = action.payload.displayName;
+            state.user.id = action.payload.uid;
+            state.isLoggedIn = true;
+        },
     },
-    // extraReducers: builder => {
-    //     builder
-    //         .addCase(register.pending, state => {
-    //             state.isLoading = true;
-    //             state.isLoggedin = false;
-    //         })
-    //         .addCase(register.fulfilled, (state, action) => {
-    //             state.isLoading = false;
-    //             state.isAuthenticated = true;
-    //             state.user = action.payload.user;
-    //             state.token = action.payload.token;
-    //             state.isLoggedin = true;
-    //         })
-    //         .addCase(register.rejected, (state, action) => {
-    //             state.isLoading = false;
-    //             state.error = action.payload;
-    //             state.isLoggedin = false;
-    //         })
-    //         .addCase(login.pending, state => {
-    //             state.isLoading = true;
-    //             state.isLoggedin = false;
-    //         })
-    //         .addCase(login.fulfilled, (state, action) => {
-    //             state.isLoading = false;
-    //             state.isAuthenticated = true;
-    //             state.user = action.payload.user;
-    //             state.token = action.payload.token;
-    //             state.isLoggedin = true;
-    //         })
-    //         .addCase(login.rejected, (state, action) => {
-    //             state.isLoading = false;
-    //             state.error = action.payload;
-    //             state.isLoggedin = false;
-    //         })
-    //         .addCase(logout.pending, state => {
-    //             state.isLoading = true;
-    //             state.isLoggedin = true;
-    //         })
-    //         .addCase(logout.fulfilled, state => {
-    //             state.isLoading = false;
-    //             state.isAuthenticated = false;
-    //             state.token = "";
-    //             state.user = { name: null, email: null };
-    //             state.isLoggedin = false;
-    //         })
-    //         .addCase(logout.rejected, (state, action) => {
-    //             state.isLoading = false;
-    //             state.error = action.payload;
-    //             state.isLoggedin = true;
-    //         })
-    //         .addCase(refreshUser.pending, state => {
-    //             state.isRefreshing = true;
-    //         })
-    //         .addCase(refreshUser.fulfilled, (state, action) => {
-    //             state.user = action.payload;
-    //             state.isAuthenticated = true;
-    //             state.isRefreshing = false;
-    //             state.isLoggedin = true;
-    //         })
-    //         .addCase(refreshUser.rejected, state => {
-    //             state.isRefreshing = false;
-    //             state.isLoggedin = false;
-    //         });
-    // }
+    extraReducers: builder => {
+        builder
+            .addCase(register.fulfilled, (state, action) => {
+                state.user.email = action.payload.email;
+                state.user.name = action.payload.displayName;
+                state.user.id = action.payload.uid;
+                state.isLoggedIn = true;
+            })
+            .addCase(logIn.fulfilled, (state, action) => {
+                state.user.email = action.payload.email;
+                state.user.name = action.payload.displayName;
+                state.user.id = action.payload.uid;
+                state.isLoggedIn = true;
+            })
+            .addCase(logOut.fulfilled, (state, action) => {
+                state.user.email = null;
+                state.user.name = null;
+                state.user.id = null;
+                state.isLoggedIn = false;
+            })
+    }
 });
 
-const persistConfig = {
-    key: 'auth',
-    storage,
-    whitelist: ['token'],
-};
-export const authReducer = persistReducer(
-    persistConfig,
-    authSlice.reducer
-);
+
+export const authReducer = authSlice.reducer
+export const { setUser } = authSlice.actions;
