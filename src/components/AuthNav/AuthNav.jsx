@@ -3,13 +3,13 @@ import {LoginForm} from "../UserForm/LoginForm.jsx";
 import { RegisterForm } from "../UserForm/RegisterForm.jsx";
 import { useState } from "react";
 import {useSelector} from "react-redux";
-import {selectIsLoggedIn} from "../../redux/auth/selectors.js";
+import {selectIsLoggedIn, selectUser} from "../../redux/auth/selectors.js";
 import {UserMenu} from "../UserMenu/UserMenu.jsx";
 
 export const AuthNav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
-    const isLoggedIn = useSelector(selectIsLoggedIn);
+    const {name} = useSelector(selectUser);
 
     const openModal = (value) => {
         setIsSelected(value);
@@ -17,7 +17,7 @@ export const AuthNav = () => {
     };
 
     return (
-        isLoggedIn ? (
+        name ? (
             <UserMenu/>
         ) : (
             <div>

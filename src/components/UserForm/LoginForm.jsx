@@ -25,9 +25,9 @@ export const LoginForm = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSubmit = async (values) => {
-        dispatch(logIn(values))
-    }
+    // const handleSubmit = async (values) => {
+    //     dispatch(logIn(values))
+    // }
 
     return (
         <FormContainer>
@@ -36,8 +36,8 @@ export const LoginForm = () => {
             <Formik
                 initialValues={initialState}
                 validationSchema={validationSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                    handleSubmit(values)
+                onSubmit={values => {
+                    dispatch(logIn(values)).then(() => {});
                 }}
             >
                 <Form autoComplete="off">
