@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilms } from "../../redux/filmsSlice/selectors.js";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { setFilter } from "../../redux/filterSlice/filterSlice.js";
+import {Select, Wrapper} from "./SelectFilters.styled.js";
+import SearchInput from "../SearchInput/SearchInput.jsx";
 
 export const SelectFilters = () => {
     const dispatch = useDispatch();
@@ -46,23 +48,24 @@ export const SelectFilters = () => {
     };
 
     return (
-        <div>
-            <select value={selectedGenre} onChange={handleFilterChange("genre")}>
+        <Wrapper>
+            <Select value={selectedGenre} onChange={handleFilterChange("genre")}>
                 <option value="">Select genre</option>
                 {genres.map((genre, index) => (
                     <option key={index} value={genre}>
                         {genre}
                     </option>
                 ))}
-            </select>
-            <select value={selectedRelease} onChange={handleFilterChange("release")}>
+            </Select>
+            <Select value={selectedRelease} onChange={handleFilterChange("release")}>
                 <option value="">Select release year</option>
                 {releases.map((release, index) => (
                     <option key={index} value={release}>
                         {release}
                     </option>
                 ))}
-            </select>
-        </div>
+            </Select>
+            <SearchInput />
+        </Wrapper>
     );
 };

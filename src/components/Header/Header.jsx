@@ -3,9 +3,10 @@ import {
 } from './Header.styled';
 import {Container} from "../Global.styled.js";
 import {AuthNav} from "../AuthNav/AuthNav.jsx";
-
+import {useAuth} from "../hooks/index.js";
 
 export const Header = () => {
+    const { isLoggedIn } = useAuth();
 
   return (
       <StyledHeader>
@@ -15,9 +16,11 @@ export const Header = () => {
                       <li>
                           <StyledNavLink to="/">Home</StyledNavLink>
                       </li>
-                      <li>
-                          <StyledNavLink to="/favorite">Favorite</StyledNavLink>
-                      </li>
+                      {isLoggedIn &&
+                          <li>
+                            <StyledNavLink to="/favorite">Favorite</StyledNavLink>
+                          </li>
+                      }
                   </StyledList>
               </StyledNav>
               <AuthNav/>

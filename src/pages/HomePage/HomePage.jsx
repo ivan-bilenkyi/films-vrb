@@ -7,7 +7,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectError, selectIsLoading} from "../../redux/filmsSlice/selectors.js";
 import {createFilms, getAllFilms} from "../../redux/filmsSlice/operations.js";
 import {EditButton} from "../DetailsPage/DetailsPage.styled.js";
-import SearchInput from "../../components/SearchInput/SearchInput.jsx";
 import {ItemTitle} from "../../components/FilmItem/FilmItem.styled.js";
 import {FilmForm} from "../../components/Formik/Formik.jsx";
 import styles from "../../components/Modal/Modal.module.css";
@@ -36,7 +35,6 @@ export default function HomePage() {
                 <StyledTitle>Films</StyledTitle>
                 <WrapperBtn>
                     <SelectFilters/>
-                    <SearchInput />
                     <EditButton onClick={() => setIsOpen(true)}>Add Film</EditButton>
                 </WrapperBtn>
                 <Modal onClose={() => setIsOpen(false)} isOpen={isOpen}>
