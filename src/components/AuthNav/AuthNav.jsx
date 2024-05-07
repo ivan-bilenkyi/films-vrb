@@ -5,6 +5,7 @@ import { useState } from "react";
 import {useSelector} from "react-redux";
 import {selectIsLoggedIn, selectUser} from "../../redux/auth/selectors.js";
 import {UserMenu} from "../UserMenu/UserMenu.jsx";
+import {Button, Wrapper} from "../UserMenu/UserMenu.styled.js";
 
 export const AuthNav = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +21,11 @@ export const AuthNav = () => {
         name ? (
             <UserMenu/>
         ) : (
-            <div>
-                <button onClick={() => openModal(true)}>Login</button>
-                <button onClick={() => openModal(false)}>Register</button>
+            <>
+                <Wrapper>
+                    <Button onClick={() => openModal(true)}>Login</Button>
+                    <Button onClick={() => openModal(false)}>Register</Button>
+                </Wrapper>
                 <Modal onClose={() => setIsOpen(false)} isOpen={isOpen}>
                     {isSelected ? (
                         <>
@@ -36,7 +39,7 @@ export const AuthNav = () => {
                         </>
                     )}
                 </Modal>
-            </div>
+            </>
         )
     );
 };
