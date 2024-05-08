@@ -16,8 +16,8 @@ import {SelectFilters} from "../../components/SelectFilters/SelectFilters.jsx";
 
 export default function HomePage() {
     const dispatch = useDispatch();
-    const isLoading = useSelector(selectIsLoading);
-    const error = useSelector(selectError);
+    // const isLoading = useSelector(selectIsLoading);
+    // const error = useSelector(selectError);
     const [isOpen, setIsOpen] = useState(false);
 
 
