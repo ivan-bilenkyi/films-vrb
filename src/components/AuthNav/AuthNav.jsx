@@ -1,21 +1,32 @@
 import { Modal } from "../Modal/Modal.jsx";
 import {LoginForm} from "../UserForm/LoginForm.jsx";
 import { RegisterForm } from "../UserForm/RegisterForm.jsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {selectIsLoggedIn, selectUser} from "../../redux/auth/selectors.js";
 import {UserMenu} from "../UserMenu/UserMenu.jsx";
 import {Button, Wrapper} from "../UserMenu/UserMenu.styled.js";
+import {useAuth} from "../hooks/index.js";
 
 export const AuthNav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
     const {name} = useSelector(selectUser);
+    const {isLogOut} = useAuth()
+
+    useEffect(() => {
+        if(isLogOut) {
+            setIsSelected(isLogOut)
+            setIsOpen(true);
+        }
+    }, [isLogOut]);
 
     const openModal = (value) => {
         setIsSelected(value);
         setIsOpen(true);
     };
+
+
 
     return (
         name ? (

@@ -18,3 +18,16 @@ export const StyledList = styled.ul`
         gap: 25px;
     }
 `;
+
+export const TextWrapper = styled.div`
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0 auto;
+    text-align: center;
+
+    & span {
+        color: #c92d2d;
+    }
+`;
