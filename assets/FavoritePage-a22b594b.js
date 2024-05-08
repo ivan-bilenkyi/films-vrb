@@ -1,1 +1,0 @@
-import{j as r,C as s}from"./index-2233f2e4.js";import{W as t,S as e,F as i}from"./HomePage.styled-35e79c57.js";import"./DetailsPage.styled-57e272e1.js";function l(){return r.jsxs(s,{children:[r.jsx(t,{children:r.jsx(e,{children:"Favorite"})}),r.jsx(i,{})]})}export{l as default};
