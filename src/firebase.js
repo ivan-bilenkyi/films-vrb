@@ -12,13 +12,13 @@ const APP_ID = import.meta.env.VITE_APP_ID;
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAe4PlXLVgvWzlkdAEpwSQGRoKVps0uNts",
-    authDomain: "films-59b2a.firebaseapp.com",
-    databaseURL: "https://films-59b2a-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "films-59b2a",
-    storageBucket: "films-59b2a.appspot.com",
-    messagingSenderId: "760793981786",
-    appId: "1:760793981786:web:469dc3218e5ffb19e10963"
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
+    databaseURL: DATABASE_URI,
+    projectId: PROJECT_ID,
+    storageBucket: STORAGE_BUCKET,
+    messagingSenderId: MESSAGING_SENDER_ID,
+    appId: APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

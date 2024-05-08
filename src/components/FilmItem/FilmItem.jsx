@@ -36,7 +36,6 @@ export const FilmItem = ({ item }) => {
 
     const handleDelete =() => {
         dispatch(removeFavorite(item));
-        console.log(item.id)
         dispatch(deleteById(item.id));
     }
 
