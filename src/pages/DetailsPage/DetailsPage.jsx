@@ -11,6 +11,7 @@ import { ItemTitle } from "../../components/FilmItem/FilmItem.styled.js";
 import { FilmForm } from "../../components/Formik/Formik.jsx";
 import { FaTimes } from "react-icons/fa";
 import styles from "../../components/Modal/Modal.module.css";
+import {useAuth} from "../../components/hooks/index.js";
 
 export default function DetailsPage () {
     const location = useLocation();
@@ -18,6 +19,7 @@ export default function DetailsPage () {
     const [item, setItem] = useState(location.state.item);
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
+    const { isLoggedIn } = useAuth();
 
     const films = useSelector(selectFilms);
 
@@ -66,7 +68,7 @@ export default function DetailsPage () {
                     <p>Genre: {film.genre.join(', ')}</p>
                     <p>Actors: {film.actors.join(', ')}</p>
                     <p>Director: {film.director}</p>
-                    <EditButton onClick={() => setIsOpen(true)}>Edit Film</EditButton>
+                    { isLoggedIn && <EditButton onClick={() => setIsOpen(true)}>Edit Film</EditButton>}
                 </FilmInfo>
 
             </FilmDetails>
