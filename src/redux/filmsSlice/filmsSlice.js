@@ -12,7 +12,6 @@ const filmsSlice = createSlice({
         builder
             .addCase(getAllFilms.pending, state => {
                 state.loading = true;
-                state.error = false;
             })
             .addCase(getAllFilms.fulfilled, (state, action) => {
                 state.loading = false;
@@ -24,10 +23,10 @@ const filmsSlice = createSlice({
             })
             .addCase(deleteById.pending, (state, action) => {
                 state.loading = true;
-                state.error = false;
             })
             .addCase(deleteById.fulfilled, (state, action) => {
                 state.items = state.items.filter(item => item.id !== action.payload.id);
+                state.loading = false;
             })
             .addCase(deleteById.rejected, state => {
                 state.loading = false;
@@ -35,7 +34,6 @@ const filmsSlice = createSlice({
             })
             .addCase(getFilmById.pending, state => {
                 state.loading = true;
-                state.error = false;
             })
             .addCase(getFilmById.fulfilled, (state, action) => {
                 state.loading = false;

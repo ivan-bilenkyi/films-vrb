@@ -13,10 +13,11 @@ import styles from "../../components/Modal/Modal.module.css";
 import {FaTimes} from "react-icons/fa";
 import {Modal} from "../../components/Modal/Modal.jsx";
 import {SelectFilters} from "../../components/SelectFilters/SelectFilters.jsx";
+import {Loading} from "notiflix";
 
 export default function HomePage() {
     const dispatch = useDispatch();
-    // const isLoading = useSelector(selectIsLoading);
+    const isLoading = useSelector(selectIsLoading);
     // const error = useSelector(selectError);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -25,6 +26,13 @@ export default function HomePage() {
         dispatch(getAllFilms());
     }, [dispatch]);
 
+    if(isLoading) {
+        return Loading.circle({
+            clickToClose: true,
+            svgSize: '60px',
+        })
+    }
+    Loading.remove();
     const handleSubmit = (id, values) => {
         dispatch(createFilms(values))
     };

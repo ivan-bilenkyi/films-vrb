@@ -6,8 +6,8 @@ import {Toaster} from "react-hot-toast";
 const SharedLayout = () => {
   return (
     <>
-        <Header />
         <Suspense fallback={null}>
+            <Header />
             <Outlet />
         </Suspense>
         <Toaster position="top-right" reverseOrder={false} />

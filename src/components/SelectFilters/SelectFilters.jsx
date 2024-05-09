@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilms } from "../../redux/filmsSlice/selectors.js";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { setFilter } from "../../redux/filterSlice/filterSlice.js";
 import {Select, Wrapper} from "./SelectFilters.styled.js";
