@@ -14,7 +14,7 @@ const APP_ID = import.meta.env.VITE_APP_ID;
 const firebaseConfig = {
     apiKey: API_KEY,
     authDomain: AUTH_DOMAIN,
-    databaseURL: DATABASE_URI,
+    databaseURL: 'https://films-59b2a-default-rtdb.europe-west1.firebasedatabase.app',
     projectId: PROJECT_ID,
     storageBucket: STORAGE_BUCKET,
     messagingSenderId: MESSAGING_SENDER_ID,
