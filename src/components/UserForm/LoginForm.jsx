@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {IoEyeOffOutline, IoEyeOutline} from "react-icons/io5";
@@ -25,9 +25,6 @@ export const LoginForm = () => {
         setShowPassword(!showPassword);
     };
 
-    // const handleSubmit = async (values) => {
-    //     dispatch(logIn(values))
-    // }
 
     return (
         <FormContainer>

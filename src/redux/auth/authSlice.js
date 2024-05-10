@@ -16,14 +16,6 @@ const initialState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState: initialState,
-    reducers: {
-        setUser(state, action) {
-            state.user.email = action.payload.email;
-            state.user.name = action.payload.displayName;
-            state.user.id = action.payload.uid;
-            state.isLoggedIn = true;
-        },
-    },
     extraReducers: builder => {
         builder
             .addCase(register.fulfilled, (state, action) => {
@@ -49,7 +41,6 @@ const authSlice = createSlice({
 });
 
 
-export const { setUser } = authSlice.actions;
 
 const persistConfig = {
     key: 'user',

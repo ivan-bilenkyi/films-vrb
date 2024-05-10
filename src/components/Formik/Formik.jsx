@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { UploadImage } from "../UploadImage/UploadImage.js";
@@ -11,6 +11,9 @@ import {
     StyledButton,
     StyledForm
 } from "./Formik.styled.jsx";
+
+const genreList = ["drama", "crime", "action", "thriller", "historical drama", "war", "adventure",
+    "fantasy", "romance", "sci-fi", "biography",]
 
 export const FilmForm = ({ onSendForm, item, onClose }) => {
     const [imageUrl, setImageUrl] = useState(item?.image);

@@ -4,7 +4,6 @@ import ErrorPage from 'pages/ErrorPage/ErrorPage';
 import {lazy, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {auth} from "./firebase.js";
-import {setUser} from "./redux/auth/authSlice.js";
 import {selectIsLoggedIn} from "./redux/auth/selectors.js";
 import {PrivateRoute} from "./components/PrivateRoute.jsx";
 
