@@ -1,16 +1,14 @@
 import cloudinary from "cloudinary-core";
 
-const name = import.meta.env.VITE_CLOUD_NAME;
-const preset = import.meta.env.VITE_UPLOAD_PRESET;
 
 const cloudinaryCore = new cloudinary.Cloudinary({
-    cloud_name: name,
+    cloud_name: 'dtsw0uqfz',
 });
 export const UploadImage = async (file) => {
     try {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", preset);
+        formData.append("upload_preset", 'ftw0ehjd');
 
         const response = await fetch(
             `https://api.cloudinary.com/v1_1/${
