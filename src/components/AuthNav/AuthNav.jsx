@@ -12,14 +12,6 @@ export const AuthNav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
     const {name} = useSelector(selectUser);
-    const {isLogOut} = useAuth()
-
-    useEffect(() => {
-        if(isLogOut) {
-            setIsSelected(isLogOut)
-            setIsOpen(true);
-        }
-    }, [isLogOut]);
 
     const openModal = (value) => {
         setIsSelected(value);

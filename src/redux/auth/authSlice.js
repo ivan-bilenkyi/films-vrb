@@ -10,7 +10,6 @@ const initialState = {
         id: null,
     },
     isLoggedIn: false,
-    isLogOut: false
 }
 
 const authSlice = createSlice({
@@ -35,7 +34,9 @@ const authSlice = createSlice({
                 state.user.name = null;
                 state.user.id = null;
                 state.isLoggedIn = false;
-                state.isLogOut = true;
+            })
+            .addCase(logOut.pending, (state, action) => {
+                state.isLoggedIn = false;
             })
     }
 });
