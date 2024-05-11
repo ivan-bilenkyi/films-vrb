@@ -11,6 +11,8 @@ import {
     StyledButton,
     StyledForm
 } from "./Formik.styled.jsx";
+import defaultImage from '../../assets/movie.jpg';
+
 
 const genreList = ["drama", "crime", "action", "thriller", "historical drama", "war", "adventure",
     "fantasy", "romance", "sci-fi", "biography",]
@@ -62,6 +64,8 @@ export const FilmForm = ({ onSendForm, item, onClose }) => {
                 if (imageUrl !== item?.image) {
                     const file = imageInputRef.current.files[0];
                     newUrlImg = await UploadImage(file);
+                } else {
+                    newUrlImg = defaultImage;
                 }
                 onClose();
                 onSendForm(item?.id, { ...values, genre: genreArray, actors: actorsArray, image: newUrlImg });

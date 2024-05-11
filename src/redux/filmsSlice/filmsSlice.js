@@ -21,15 +21,15 @@ const filmsSlice = createSlice({
                 state.loading = false;
                 state.error = true;
             })
-            .addCase(deleteById.pending, (state, action) => {
-                state.loading = true;
-            })
+            // .addCase(deleteById.pending, (state, action) => {
+            //     state.loading = true;
+            // })
             .addCase(deleteById.fulfilled, (state, action) => {
                 state.items = state.items.filter(item => item.id !== action.payload.id);
-                state.loading = false;
+                // state.loading = false;
             })
             .addCase(deleteById.rejected, state => {
-                state.loading = false;
+                // state.loading = false;
                 state.error = true;
             })
             .addCase(getFilmById.pending, state => {
