@@ -21,7 +21,7 @@ import {deleteById} from "../../redux/filmsSlice/operations.js";
 import {selectFavoriteFilms} from "../../redux/favoriteSlice/selectors.js";
 
 export const FilmItem = ({ item }) => {
-    const { id, title, release_date, rating, image } = item;
+    const { id, title, release_date, rating, image = '' } = item;
     const [isFavorite, setIsFavorite] = useState(false);
     const location = useLocation();
     const year = release_date.split("-")[0];
