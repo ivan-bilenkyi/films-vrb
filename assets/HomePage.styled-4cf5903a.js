@@ -1,4 +1,4 @@
-import{s as o,G as v,h as F,r as u,i as p,u as V,a as x,j as t,L as C,k as f,l as M,m as T}from"./index-7950ff2d.js";import{S as k,a as W,b as G,c as R,d as z,I as D,F as H,e as g,R as E,f as O,B as Z,g as _,h as A}from"./DetailsPage.styled-991e6018.js";const ae=o.h1`
+import{s as o,G as v,h as F,r as u,i as p,u as V,a as x,j as t,L as C,k as f,l as M,m as T}from"./index-243ac417.js";import{S as k,a as W,b as G,c as R,d as z,I as D,F as H,e as g,R as E,f as O,B as Z,g as _,h as A}from"./DetailsPage.styled-1282f173.js";const ae=o.h1`
 color: #424242;
 `,N=o.ul`
     display: flex;
